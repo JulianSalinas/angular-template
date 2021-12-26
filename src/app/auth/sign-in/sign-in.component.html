@@ -1,24 +1,43 @@
-<div class="h-full flex items-start md:items-center justify-center bg-gradient-to-br from-[#FFFFFF] to-[#E9E4F0]">
+<form [formGroup]="signInForm" (ngSubmit)="signIn()" class="flex flex-1 flex-col gap-2">
 
-  <form [formGroup]="signInForm" (ngSubmit)="signIn()" >
+  <p class="text-4xl font-bold dark:text-white">
+    Sign In
+  </p>
 
-    <div class="flex flex-col md:flex-row shadow-md m-4">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" autocomplete="off">
+    <mat-error *ngIf="signInForm.get('username')?.hasError('required') && signInForm.get('username')?.touched">
+      Please write your username
+    </mat-error>
+  </mat-form-field>
 
-      <div class="flex flex-1 flex-col justify-end rounded-t md:rounded-l p-8 sign-image">
-        <div class="text-4xl font-bold text-white">
-          Welcome
-        </div>
-        <p class="text-base font-thin text-white">
-          Imagination is more important than knowledge!
-        </p>
-      </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" autocomplete="off">
+    <mat-error *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched">
+      Please write your password
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox class="example-margin" [checked]="rememberMe">
+    Remember me?
+  </mat-checkbox>
+
+  <button mat-raised-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
+    Sign In
+  </button>
+
+  <div class="text-center font-thin text-xs">
+    Or
+  </div>
+
+  <button mat-raised-button type="button" color="accent" (click)="googleSignIn()">
+    Sign In with Google
+  </button>
   
-      <div class="flex flex-1 flex-col stretch rounded-b md:rounded-r p-8 bg-white" style="min-height: 400px;">
-  
+  <div class="text-center font-thin text-xs">
+    Not registered? <a routerLink="../sign-up">Create an account!</a>
+  </div>
 
-      </div>
-    </div>
-
-  </form>
-
-</div>
+</form>

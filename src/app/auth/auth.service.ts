@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-// import { AngularFireAuth } from '@angular/fire/compat/auth';
-// import { Router } from '@angular/router';
-// import firebase from 'firebase/compat/app';
+
+import { Router } from '@angular/router';
 import { User } from '../models/User';
+//import { getRedirectResult, GoogleAuthProvider, signInWithRedirect } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  accessToken: string | undefined;
 
   user: User = {
     uid: 'asdasd',
@@ -17,11 +19,11 @@ export class AuthService {
     emailVerified: true,
   };
 
-  //constructor(private auth: AngularFireAuth, private router: Router) { }
+  constructor(private router: Router) { }
 
   async signIn(email: string, password: string): Promise<User> {
 
-    // let result = await this.auth.signInWithEmailAndPassword(email, password);
+    // let result = await getAuth().signInWithEmailAndPassword(email, password);
 
     // if(result.user == null)
     //   throw 'User not authenticated';
@@ -43,18 +45,27 @@ export class AuthService {
     return this.user;
   }
 
-  async googleSignIn(): Promise<User> {
+  async googleSignIn(): Promise<void> {
 
-    // const provider = new firebase.auth.GoogleAuthProvider();
-    
-    // let result = await this.auth.signInWithPopup(provider);
+    //let auth = this.auth;
+    //console.log(auth);
+    // let provider = new GoogleAuthProvider();
 
-    // if(result.user == null)
+    // provider.addScope('profile');
+    // provider.addScope('email');
+
+    // await signInWithRedirect(auth, provider);
+
+    // const result = await getRedirectResult(auth);
+
+    // if(!result || result.user == null)
     //   throw 'User not authenticated';
 
     // let user: User = {...result.user };
+    // let credential = GoogleAuthProvider.credentialFromResult(result);
+    // this.accessToken = credential?.accessToken;
 
-    return this.user;
+    // return user;
   }
 
   async signOut(): Promise<void> {

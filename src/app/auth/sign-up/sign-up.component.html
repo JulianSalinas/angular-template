@@ -1,0 +1,39 @@
+<form [formGroup]="signInForm" (ngSubmit)="signIn()" class="flex flex-1 flex-col gap-2">
+
+  <p class="text-4xl font-bold dark:text-white">
+    Sign Up
+  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" autocomplete="off">
+    <mat-error *ngIf="signInForm.get('username')?.hasError('required') && signInForm.get('username')?.touched">
+      Please write your username
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" autocomplete="off">
+    <mat-error *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched">
+      Please write your password
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Confirmation</mat-label>
+    <input matInput formControlName="passwordConfirmation" type="passwordConfirmation" autocomplete="off">
+    <mat-error *ngIf="signInForm.get('passwordConfirmation')?.hasError('required') && signInForm.get('passwordConfirmation')?.touched">
+      Please confirm your password
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
+    Sign Up
+  </button>
+
+  <div class="text-center font-thin text-xs">
+    Alredy have an account? <a routerLink="../sign-in">Sign In!</a>
+  </div>
+
+</form>

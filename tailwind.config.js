@@ -13,7 +13,7 @@ module.exports = {
   },
   purge: {
     content: [
-      './src/**/*.{html,ts}',
+      './src/**/*.{html,ts,css}',
     ]
   }
 }
