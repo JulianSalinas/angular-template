@@ -7,7 +7,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 const routes: Routes = [
   { 
     path: '', 
-    redirectTo: '/auth', 
+    redirectTo: 'auth', 
     pathMatch: 'full' 
   },
   { 
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: '', 
-        redirectTo: '/auth/sign-in', 
+        redirectTo: 'sign-in', 
         pathMatch: 'full' 
       },
       {
