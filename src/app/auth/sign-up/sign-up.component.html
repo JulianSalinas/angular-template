@@ -28,12 +28,12 @@
     </mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
+  <button mat-flat-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
     Sign Up
   </button>
 
-  <div class="text-center font-thin text-xs">
-    Alredy have an account? <a routerLink="../sign-in">Sign In!</a>
+  <div class="text-center">
+    Already have an account? <a routerLink="../sign-in" class="cursor-pointer text-indigo-600 hover:text-indigo-500">Sign In!</a>
   </div>
 
 </form>

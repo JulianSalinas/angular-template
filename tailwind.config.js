@@ -1,13 +1,14 @@
-const materialColors = require('material-ui-colors');
-
 module.exports = {
   darkMode: 'class',
+  mode: 'jit',
   content: [],
   theme: {
     extend: {},
     // colors: { ...materialColors }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
   corePlugins: {
     
   },
