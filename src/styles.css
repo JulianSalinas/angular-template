@@ -23,11 +23,11 @@ body {
   /* Input */
 
   .tw-input {
-    @apply rounded shadow-sm transition-all border-gray-300 placeholder-gray-400 focus:border-gray-300 focus:ring-2 focus:ring-offset-1
+    @apply rounded shadow-sm transition-all border-gray-300 placeholder-gray-400 
   }
 
   .tw-input.primary {
-    @apply focus:ring-purple-600
+    @apply focus:border-gray-400 focus:ring-gray-400
   }
 
   .tw-input.ng-invalid.ng-touched{

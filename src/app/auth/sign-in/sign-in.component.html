@@ -4,14 +4,14 @@
     Sign In
   </h1>
 
-  <div class="flex flex-col gap-1 group">
+  <div class="flex flex-col gap-1">
 
-    <label for="username" class="text-sm font-medium text-gray-700">
+    <label for="username" class="tw-label">
       Username
     </label>
 
     <div class="shadow-sm">
-      <input id="username" formControlName="username" type="text" placeholder="your username..." class="w-full tw-input primary">
+      <input id="username" formControlName="username" type="text" placeholder="your username..." autocomplete="off" class="w-full tw-input primary">
     </div>
 
     <p *ngIf="signInForm.get('username')?.hasError('required') && signInForm.get('username')?.touched" class="tw-p danger">
@@ -22,12 +22,12 @@
 
   <div class="flex flex-col gap-1">
 
-    <label for="password" class="text-sm font-medium text-gray-700">
+    <label for="password" class="tw-label">
       Password
     </label>
 
     <div class="shadow-sm">
-      <input id="password" formControlName="password" type="password" placeholder="your password..." class="w-full tw-input primary">
+      <input id="password" formControlName="password" type="password" placeholder="your password..." autocomplete="off" class="w-full tw-input primary">
     </div>
 
     <p *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched" class="tw-p danger">
