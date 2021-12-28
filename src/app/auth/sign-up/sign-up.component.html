@@ -4,15 +4,35 @@
     Sign Up
   </p>
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
     <input matInput formControlName="username" autocomplete="off">
     <mat-error *ngIf="signInForm.get('username')?.hasError('required') && signInForm.get('username')?.touched">
       Please write your username
     </mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
+  <div>
+
+    <label for="price" class="text-sm">
+      Username
+    </label>
+
+    <div class="mt-1 relative rounded-md shadow-sm">
+
+      <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00">
+      <div class="absolute inset-y-0 right-0 flex items-center">
+        <label for="currency" class="sr-only">Currency</label>
+        <select id="currency" name="currency" class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+          <option>USD</option>
+          <option>CAD</option>
+          <option>EUR</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
     <input matInput formControlName="password" type="password" autocomplete="off">
     <mat-error *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched">
@@ -26,11 +46,11 @@
     <mat-error *ngIf="signInForm.get('passwordConfirmation')?.hasError('required') && signInForm.get('passwordConfirmation')?.touched">
       Please confirm your password
     </mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <button mat-flat-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
+  <!-- <button mat-flat-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
     Sign Up
-  </button>
+  </button> -->
 
   <div class="text-center">
     Already have an account? <a routerLink="../sign-in" class="cursor-pointer text-indigo-600 hover:text-indigo-500">Sign In!</a>
