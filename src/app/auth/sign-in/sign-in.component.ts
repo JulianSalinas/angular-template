@@ -9,11 +9,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
 
-  rememberMe: boolean = false;
-
   signInForm = this.formBuilder.group({
     username: ['', [Validators.required, Validators.maxLength(24)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]]
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
+    rememberMe: ['']
   });
 
   constructor(
@@ -32,12 +31,13 @@ export class SignInComponent implements OnInit {
     }
 
     console.log("Signing In...");
+    console.log("Form: ", this.signInForm.value);
     let user = await this.authService.googleSignIn();
     console.log("Signed In: ", user);
   }
 
   async googleSignIn(): Promise<void> {
-    console.log("Google Signing In...", this.signInForm.get('username')?.value);
+    console.log("Google Signing In...");
     let user = await this.authService.googleSignIn();
     console.log("Google Signed In: ", user);
   }

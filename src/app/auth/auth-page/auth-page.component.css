@@ -1,0 +1,6 @@
+.auth-background {
+  background-repeat: repeat;
+  background-image:
+    url("../../../assets/patterns/grid.svg"),
+    linear-gradient(to bottom right, #5C258D, #4389A2);
+}

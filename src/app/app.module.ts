@@ -11,6 +11,11 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,8 +30,13 @@ import { TranslocoRootModule } from './transloco-root.module';
     provideStorage(() => getStorage()),
     HttpClientModule,
     TranslocoRootModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far, fab);
+  }
+}

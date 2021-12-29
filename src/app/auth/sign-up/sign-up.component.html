@@ -1,8 +1,8 @@
-<form [formGroup]="signInForm" (ngSubmit)="signIn()" class="flex flex-1 flex-col gap-2">
+<form [formGroup]="signInForm" (ngSubmit)="signUp()" class="flex flex-1 flex-col gap-4">
 
-  <p class="tw-title">
+  <h1 class="tw-title">
     Sign Up
-  </p>
+  </h1>
 
   <div class="flex flex-col gap-1">
 
@@ -52,12 +52,12 @@
 
   </div>
 
-  <!-- <button mat-flat-button color="primary" (click)="signIn()" [disabled]="!signInForm.valid">
+  <button type="submit" [disabled]="!signInForm.valid" class="tw-button primary">
     Sign Up
-  </button> -->
+  </button>
 
-  <div class="text-center">
-    Already have an account? <a routerLink="../sign-in" class="cursor-pointer text-indigo-600 hover:text-indigo-500">Sign In!</a>
-  </div>
+  <p class="text-center tw-p">
+    Already have an account? <a routerLink="../sign-in" class="tw-a primary">Sign In!</a>
+  </p>
 
 </form>

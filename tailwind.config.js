@@ -4,14 +4,11 @@ module.exports = {
   content: [],
   theme: {
     extend: {},
-    // colors: { ...materialColors }
   },
   plugins: [
     require('@tailwindcss/forms'),
   ],
-  corePlugins: {
-    
-  },
+  corePlugins: {},
   purge: {
     content: [
       './src/**/*.{html,ts,css}',

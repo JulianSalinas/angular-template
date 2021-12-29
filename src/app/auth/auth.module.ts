@@ -10,17 +10,19 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { TranslocoRootModule } from "../transloco-root.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [SignInComponent, AuthCardComponent, SignUpComponent, AuthPageComponent],
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslocoRootModule
-    //AngularFireAuth
-  ],
+    imports: [
+        AppRoutingModule,
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslocoRootModule,
+        FontAwesomeModule,
+        //AngularFireAuth
+    ],
 })
 export class AuthModule {}
