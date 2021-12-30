@@ -77,4 +77,10 @@ body {
     @apply flex items-center justify-center px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500
   }
 
+  /* Checkbox */
+
+  .tw-checkbox {
+    @apply text-indigo-600 border-gray-300 rounded focus:ring-indigo-500
+  }
+
 /* } */

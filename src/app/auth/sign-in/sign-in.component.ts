@@ -1,6 +1,7 @@
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -10,18 +11,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class SignInComponent implements OnInit {
 
   signInForm = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.maxLength(24)]],
+    email: ['', [Validators.required, Validators.maxLength(24)]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
-    rememberMe: ['']
+    rememberMe: [true]
   });
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   async signIn(): Promise<void> {
 
@@ -30,20 +30,25 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    console.log("Signing In...");
-    console.log("Form: ", this.signInForm.value);
-    let user = await this.authService.googleSignIn();
-    console.log("Signed In: ", user);
+    let email = this.signInForm.get('email')?.value as string;
+    let password = this.signInForm.get('password')?.value as string;
+
+    try {
+      await this.authService.signIn(email.trim(), password.trim());
+      await this.router.navigate(['dashboard']);
+    } catch (error) {
+      console.log('Sign In Error:', error);
+    }
+
   }
 
   async googleSignIn(): Promise<void> {
-    console.log("Google Signing In...");
-    let user = await this.authService.googleSignIn();
-    console.log("Google Signed In: ", user);
-  }
-
-  async navigateToSignUp(): Promise<void> {
-    console.log("Navigating to Sign Up");
+    try {
+      await this.authService.googleSignIn();
+      await this.router.navigate(['dashboard']);
+    } catch (error) {
+      console.log('Google Sign In Error:', error);
+    }
   }
 
 }

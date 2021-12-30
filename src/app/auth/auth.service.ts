@@ -1,75 +1,73 @@
 import { Injectable } from '@angular/core';
-
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { User } from '../models/User';
-//import { getRedirectResult, GoogleAuthProvider, signInWithRedirect } from '@angular/fire/auth';
+import { TranslocoService } from "@ngneat/transloco";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  accessToken: string | undefined;
+  constructor(
+    private router: Router,
+    private auth: Auth,
+    private translocoService: TranslocoService) { }
 
-  user: User = {
-    uid: 'asdasd',
-    displayName: 'Julian Salinas',
-    email: 'july12sali@gmail.com',
-    photoURL: 'https://pics.me.me/thumb_45993-anime-forum-avatars-profile-photos-avatar-abyss-51102772.png',
-    emailVerified: true,
-  };
-
-  constructor(private router: Router) { }
-
-  async signIn(email: string, password: string): Promise<User> {
-
-    // let result = await getAuth().signInWithEmailAndPassword(email, password);
-
-    // if(result.user == null)
-    //   throw 'User not authenticated';
-
-    // let user: User = {...result.user };
-
-    return this.user;
+  async signIn(email: string, password: string): Promise<void> {
+    try {
+      let userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      console.log('Signed In: ', userCredential.user);
+    } catch (e) {
+      console.log('Sign In finished with error: ', e);
+      throw e;
+    }
   }
 
-  async signUp(email: string, password: string): Promise<User> {
-    
-    // let result = await this.auth.createUserWithEmailAndPassword(email, password);
-
-    // if(result.user == null)
-    //   throw 'User not signed up';
-
-    // let user: User = {...result.user };
-
-    return this.user;
+  async signUp(email: string, password: string): Promise<void> {
+    try {
+      let userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      console.log('Signed Up: ', userCredential.user);
+    } catch (e) {
+      console.log('Sign Up finished with error: ', e);
+      throw e;
+    }
   }
 
   async googleSignIn(): Promise<void> {
 
-    //let auth = this.auth;
-    //console.log(auth);
-    // let provider = new GoogleAuthProvider();
+    let provider = new GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
 
-    // provider.addScope('profile');
-    // provider.addScope('email');
+    try {
+      this.auth.languageCode = this.translocoService.getActiveLang();
+      console.log('Google Sign In set to ', this.auth.languageCode);
 
-    // await signInWithRedirect(auth, provider);
+      if (this.auth.currentUser) {
+        console.log('User is already Signed In');
+        return;
+      }
 
-    // const result = await getRedirectResult(auth);
+      await signInWithPopup(this.auth, provider);
+      const userCredential = await getRedirectResult(this.auth);
+      console.log('Signed In with Google: ', userCredential?.user);
 
-    // if(!result || result.user == null)
-    //   throw 'User not authenticated';
-
-    // let user: User = {...result.user };
-    // let credential = GoogleAuthProvider.credentialFromResult(result);
-    // this.accessToken = credential?.accessToken;
-
-    // return user;
+    } catch (e) {
+      console.log('Signed In with Google Error: ', e);
+      throw e;
+    }
   }
 
   async signOut(): Promise<void> {
-    // return this.auth.signOut();
+    await signOut(this.auth);
   }
 
 }

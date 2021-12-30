@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
@@ -9,42 +10,36 @@ import { AuthService } from '../auth.service';
 })
 export class SignUpComponent implements OnInit {
 
-  rememberMe: boolean = false;
-
-  signInForm = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.maxLength(24)]],
+  signUpForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.maxLength(24)]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
     passwordConfirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]]
   });
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-  }
+  async signUp(): Promise<void> {
 
-  async signIn(): Promise<void> {
-
-    if (!this.signInForm.valid) {
-      this.signInForm.markAllAsTouched();
+    if (!this.signUpForm.valid) {
+      this.signUpForm.markAllAsTouched();
       return;
     }
 
-    console.log("Signing In...");
-    let user = await this.authService.googleSignIn();
-    console.log("Signed In: ", user);
-  }
+    let email = this.signUpForm.get('email')?.value as string;
+    let password = this.signUpForm.get('password')?.value as string;
 
-  async googleSignIn(): Promise<void> {
-    console.log("Google Signing In...", this.signInForm.get('username')?.value);
-    let user = await this.authService.googleSignIn();
-    console.log("Google Signed In: ", user);
-  }
+    try {
+      await this.authService.signUp(email.trim(), password.trim());
+      await this.router.navigate(['dashboard']);
+    } catch (error) {
+      console.log('Sign Up Error:', error);
+    }
 
-  async signUp(): Promise<void> {
-    console.log("Navigating to Sign Up");
   }
 
 }
