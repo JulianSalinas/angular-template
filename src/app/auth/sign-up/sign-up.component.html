@@ -10,7 +10,7 @@
       Email
     </label>
 
-    <input id="email" formControlName="email" type="email" autocomplete="off" class="w-full tw-input primary" maxlength="24">
+    <input id="email" formControlName="email" type="email" autocomplete="off" class="w-full tw-input primary" maxlength="50">
 
     <p *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched" class="tw-p danger">
       Please write your email
@@ -24,7 +24,13 @@
       Password
     </label>
 
-    <input id="password" formControlName="password" type="password" autocomplete="off" class="w-full tw-input primary" maxlength="24">
+    <input
+      id="password"
+      formControlName="password"
+      type="password"
+      autocomplete="off"
+      class="w-full tw-input primary"
+      maxlength="50">
 
     <p *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched" class="tw-p danger">
       Please write your password
@@ -42,19 +48,30 @@
       Confirmation
     </label>
 
-    <input id="confirmation" formControlName="passwordConfirmation" type="password" autocomplete="off" class="w-full tw-input primary">
+    <input
+      id="confirmation"
+      formControlName="confirmation"
+      type="password"
+      autocomplete="off"
+      class="w-full tw-input primary"
+      maxlength="50">
 
-    <p *ngIf="signUpForm.get('passwordConfirmation')?.hasError('required') && signUpForm.get('passwordConfirmation')?.touched" class="tw-p danger">
+    <p *ngIf="signUpForm.get('confirmation')?.hasError('required') && signUpForm.get('confirmation')?.touched" class="tw-p danger">
       Please confirm your password
+    </p>
+
+    <p *ngIf="signUpForm.get('confirmation')?.hasError('notSame') && signUpForm.get('confirmation')?.touched" class="tw-p danger">
+      The confirmation should match the password
     </p>
 
   </div>
 
-  <button type="submit" [disabled]="!signUpForm.valid" class="tw-button primary">
+  <button type="submit" [disabled]="!signUpForm.valid" class="flex justify-center gap-2 tw-button primary">
+    <fa-icon *ngIf="signUpForm.disabled" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
     Sign Up
   </button>
 
-  <p class="text-center tw-p">
+  <p class="text-center tw-p" *ngIf="!signUpForm.disabled">
     Already have an account? <a routerLink="../sign-in" class="tw-a primary">Sign In!</a>
   </p>
 

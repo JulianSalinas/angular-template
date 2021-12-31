@@ -25,7 +25,7 @@
     </label>
 
     <div class="shadow-sm">
-      <input id="password" formControlName="password" type="password" autocomplete="off" class="w-full tw-input primary" maxlength="24">
+      <input id="password" formControlName="password" type="password" autocomplete="off" class="w-full tw-input primary" maxlength="50">
     </div>
 
     <p *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched" class="tw-p danger">
@@ -39,27 +39,32 @@
   </div>
 
   <div class="flex items-center gap-2">
-    <input formControlName="rememberMe" type="checkbox" class="tw-checkbox">
-    <p class="text-center tw-p">Remember me?</p>
+    <input formControlName="rememberMe" type="checkbox" class="tw-checkbox peer">
+    <p class="tw-p peer-disabled:text-gray-400">Remember me?</p>
   </div>
 
-  <button type="submit" [disabled]="!signInForm.valid" class="tw-button primary">
+  <button type="submit" [disabled]="!signInForm.valid" class="flex justify-center gap-2 tw-button primary" >
+    <fa-icon *ngIf="signInForm.disabled" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
     Sign In
   </button>
 
-  <div class="flex items-center gap-2">
-    <div class="flex-1 border-t border-gray-200"></div>
-    <div class="tw-p">Or</div>
-    <div class="flex-1 border-t border-gray-200"></div>
-  </div>
+  <ng-container *ngIf="!signInForm.disabled">
 
-  <button type="button" (click)="googleSignIn()" class="tw-button-outline flex gap-2">
-    <img src="../../../assets/svgs/google.svg" alt="Google Icon" width="16" height="16"/>
-    Sign In with Google
-  </button>
+    <div class="flex items-center gap-2">
+      <div class="flex-1 border-t border-gray-200"></div>
+      <div class="tw-p">Or</div>
+      <div class="flex-1 border-t border-gray-200"></div>
+    </div>
 
-  <p class="text-center tw-p">
-    Not registered yet? <a routerLink="../sign-up" class="tw-a primary">Create an account!</a>
-  </p>
+    <button type="button" (click)="googleSignIn()" class="tw-button-outline flex gap-2">
+      <img src="../../../assets/svgs/google.svg" alt="Google Icon" width="16" height="16"/>
+      Sign In with Google
+    </button>
+
+    <p class="text-center tw-p">
+      Not registered yet? <a routerLink="../sign-up" class="tw-a primary">Create an account!</a>
+    </p>
+
+  </ng-container>
 
 </form>

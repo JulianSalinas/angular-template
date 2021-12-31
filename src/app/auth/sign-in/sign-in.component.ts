@@ -10,10 +10,14 @@ import { Router } from "@angular/router";
 })
 export class SignInComponent implements OnInit {
 
+  isSigningIn: boolean = true;
+
+  validators = [Validators.required, Validators.maxLength(24)];
+
   signInForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.maxLength(24)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
-    rememberMe: [true]
+    email: ['julian4001@outlook.com', [Validators.required, Validators.maxLength(50)]],
+    password: ['asdasdasd', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+    rememberMe: [false]
   });
 
   constructor(
@@ -34,9 +38,12 @@ export class SignInComponent implements OnInit {
     let password = this.signInForm.get('password')?.value as string;
 
     try {
+      this.signInForm.disable();
+      await new Promise(r => setTimeout(r, 1000));
       await this.authService.signIn(email.trim(), password.trim());
       await this.router.navigate(['dashboard']);
     } catch (error) {
+      this.signInForm.enable();
       console.log('Sign In Error:', error);
     }
 

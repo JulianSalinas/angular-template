@@ -11,7 +11,7 @@ module.exports = {
   corePlugins: {},
   purge: {
     content: [
-      './src/**/*.{html,ts,css}'
+      './src/**/*.{html,ts,css}',
     ]
   }
 }
