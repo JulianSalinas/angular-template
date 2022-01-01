@@ -1,0 +1,22 @@
+<ng-template #successContentTemplate>
+  <p class="tw-p">
+    The process took 1566sm, <a routerLink="../auth" class="tw-a primary">click to see the results</a>.
+  </p>
+</ng-template>
+
+<ng-template #errorContentTemplate>
+  <p class="tw-p">
+    This email is already registered, <a routerLink="../auth" class="tw-a primary">try to sign In</a>.
+  </p>
+</ng-template>
+
+<div class="flex flex-col gap-2 fixed bottom-4 right-4 notification-container" aria-live="polite">
+
+  <ng-container *ngFor="let notification of notifications">
+    <app-notification-popup
+      [notification]="notification"
+      [customContentTemplate]="notification.customContentTemplate">
+    </app-notification-popup>
+  </ng-container>
+
+</div>

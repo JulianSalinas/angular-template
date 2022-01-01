@@ -15,8 +15,16 @@ export class SignInComponent implements OnInit {
   validators = [Validators.required, Validators.maxLength(24)];
 
   signInForm = this.formBuilder.group({
-    email: ['julian4001@outlook.com', [Validators.required, Validators.maxLength(50)]],
-    password: ['asdasdasd', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+
+    email: ['', [
+      Validators.required,
+      Validators.maxLength(50)]],
+
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(50)]],
+
     rememberMe: [false]
   });
 

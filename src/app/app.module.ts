@@ -16,6 +16,9 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { SharedModule } from "./shared/shared.module";
+import { PagesModule } from "./pages/pages.module";
+import { NotificationsModule } from "./notifications/notifications.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +31,9 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
     AuthModule,
+    SharedModule,
+    PagesModule,
+    NotificationsModule,
     AppRoutingModule,
     FontAwesomeModule,
     TranslocoRootModule
