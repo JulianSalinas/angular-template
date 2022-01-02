@@ -1,4 +1,4 @@
-<div class="flex justify-between gap-2 shadow-md bg-white rounded p-4 notification">
+<div class="flex justify-between gap-2 shadow-md bg-white rounded p-4 notification-popup" [@simpleFadeAnimation]="'in'">
 
   <div *ngIf="notification?.role != 'default'">
 
@@ -34,7 +34,7 @@
       {{ notification?.title }}
     </div>
 
-    <p class="tw-p" *ngIf="notification?.content">
+    <p class="tw-p" *ngIf="!customContentTemplate">
       {{ notification?.content }}
     </p>
 
@@ -43,7 +43,7 @@
   </div>
 
   <div>
-    <fa-icon [icon]="['fas', 'times']" class="text-gray-300 cursor-pointer" (click)="close()"></fa-icon>
+    <fa-icon [icon]="['fas', 'times']" class="text-gray-300 cursor-pointer" (click)="close(notification?.key)"></fa-icon>
   </div>
 
 </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { CustomNotificationItem, NotificationItem } from "../notification-item";
+import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from "../notifications.service";
+import { NotificationItemWithKey } from "../notification-item";
 
 @Component({
   selector: 'app-notification-container',
@@ -9,41 +9,14 @@ import { NotificationsService } from "../notifications.service";
 })
 export class NotificationContainerComponent implements OnInit {
 
-  @ViewChild('successContentTemplate')
-  successContentTemplate: TemplateRef<any> | null = null;
-
-  @ViewChild('errorContentTemplate')
-  errorContentTemplate: TemplateRef<any> | null = null;
-
-  notifications: CustomNotificationItem[] = [];
+  notifications: NotificationItemWithKey[] = [];
 
   constructor(private notificationsService: NotificationsService) { }
 
   ngOnInit(): void { }
 
   ngAfterViewInit() {
-
-    this.notifications = [
-      {
-        title: 'Could not sign up',
-        role: 'danger',
-        customContentTemplate: this.errorContentTemplate
-      },
-      {
-        title: 'Welcome',
-        role: 'info',
-        content: 'Notifications will appear here!',
-        customContentTemplate: null
-      }
-    ];
-
-    this.notificationsService.notifications.subscribe(notifications => {
-      this.notifications = notifications.map(n => <CustomNotificationItem>n);
-    });
-
-    this.notificationsService.info('Welcome', 'Notifications will appear here!');
-
-
+    this.notificationsService.notifications.subscribe(notifications => this.notifications = notifications);
   }
 
 }

@@ -101,3 +101,27 @@
     </div>
   </div>
 </nav>
+
+<ng-template #successContentTemplate>
+  <p class="tw-p">
+    The process took 1566sm, <a routerLink="../auth" class="tw-a primary">click to see the results</a>.
+  </p>
+</ng-template>
+
+<ng-template #errorContentTemplate>
+  <p class="tw-p">
+    This email is already registered, <a routerLink="../auth" class="tw-a primary">try to sign In</a>.
+  </p>
+</ng-template>
+
+<button (click)="showNotification()" class="tw-button primary">
+  INFO
+</button>
+
+<button (click)="showSuccess()" class="tw-button primary">
+  SUCCESS
+</button>
+
+<button (click)="showError()" class="tw-button primary">
+  ERROR
+</button>
